@@ -66,6 +66,7 @@
     }
 
    private fun checkLen(arrayBeforeSeparate: Array<Array<Char>>):Boolean{
+       if (arrayBeforeSeparate.size!=9)return false
        arrayBeforeSeparate.forEach { if (it.size != 9) return false }
        return true
     }
