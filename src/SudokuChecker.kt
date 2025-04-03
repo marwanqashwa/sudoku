@@ -1,6 +1,6 @@
  open class SudokuChecker {
 
-    fun sudokuCheckValidation(sudoku: Array<Array<Char>>):Boolean{
+   fun sudokuCheckValidation(sudoku: Array<Array<Char>>):Boolean{
         if (!checkLen(sudoku))return false
         if (!checkValidationOfChar(sudoku))return false
         val sudokuToCheck=separateEachRowColumnSubgrid(sudoku)
@@ -42,9 +42,9 @@
 
    private fun checkRowColumnSubgrid(row:Array<Char>):Boolean{
 
-       val seen = mutableSetOf<Char>()
+       val rowToCheck = mutableSetOf<Char>()
        for (cell in row) {
-           if (cell != '-' && !seen.add(cell)) {
+           if (cell != '-' && !rowToCheck.add(cell)) {
                return false
            }
        }

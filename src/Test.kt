@@ -1,10 +1,8 @@
 
 
 class Test {
-
     companion object :SudokuChecker(){
-        fun checks() {
-
+        fun checksSudoku() {
             check(
                 name = "valid sudoku all complete",
                 correctRes = true,
@@ -35,7 +33,6 @@ class Test {
                     arrayOf('3', '4', '-', '2', '8', '6', '1', '7', '9')
                 ))
             )
-
             check(
                 name = "when invalid row there is repetition ",
                 correctRes = false,
@@ -51,7 +48,6 @@ class Test {
                     arrayOf('3', '4', '5', '2', '8', '6', '1', '7', '7')//7
                 ))
             )
-
             check(
                 name = "when invalid column there is repetition ",
                 correctRes = false,
@@ -67,7 +63,6 @@ class Test {
                     arrayOf('5', '4', '5', '2', '8', '6', '1', '7', '9')//5
                 ))
             )
-
             check(
                 name = "when invalid box 3*3 there is repetition ",
                 correctRes = false,
@@ -83,8 +78,6 @@ class Test {
                     arrayOf('3', '4', '5', '2', '8', '6', '1', '1', '9')//1
                 ))
             )
-
-
             check(
                 name = "when invalid size of row  ",
                 correctRes = false,
@@ -114,7 +107,6 @@ class Test {
                     arrayOf('2', '8', '7', '4', '1', '9', '6', '3', '5'),
                 ))
             )
-
             check(
                 name = "when invalid input not 1..9 or - ",
                 correctRes = false,
@@ -130,10 +122,7 @@ class Test {
                     arrayOf('3', '4', '5', '2', '8', '6', '1', '7', '9')
                 ))
             )
-
-
         }
-
         private fun check(name: String,correctRes:Boolean,res:Boolean){
 
             if(res==correctRes) println("success test $name")
@@ -141,6 +130,7 @@ class Test {
         }
     }
 }
+
 /*
 - - - | - - - | - - -
 - - - | - - - | - - -

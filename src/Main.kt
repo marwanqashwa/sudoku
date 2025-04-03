@@ -1,6 +1,5 @@
 
 fun main() {
-
-    Test.checks()
+    Test.checksSudoku()
 }
 
