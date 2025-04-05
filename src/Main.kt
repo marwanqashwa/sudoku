@@ -1,5 +1,6 @@
 
 fun main() {
-    Test.checksSudoku()
+    val testSudokuChecker=TestSudokuChecker()
+    testSudokuChecker.checksSudoku()
 }
 

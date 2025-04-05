@@ -1,12 +1,18 @@
 
 
-class Test {
-    companion object :SudokuChecker(){
+class TestSudokuChecker {
+
         fun checksSudoku() {
+           val sudokuChecker =SudokuChecker()
             check(
-                name = "valid sudoku all complete",
+                name = " when invalid sudoku empty should return false",
+                correctRes = false,
+                res = sudokuChecker.sudokuCheckValidation(arrayOf())
+            )
+            check(
+                name = "when valid sudoku all complete should return true",
                 correctRes = true,
-                res = sudokuCheckValidation(arrayOf(
+                res = sudokuChecker.sudokuCheckValidation(arrayOf(
                     arrayOf('5', '3', '4', '6', '7', '8', '9', '1', '2'),
                     arrayOf('6', '7', '2', '1', '9', '5', '3', '4', '8'),
                     arrayOf('1', '9', '8', '3', '4', '2', '5', '6', '7'),
@@ -19,9 +25,9 @@ class Test {
                 ))
             )
             check(
-                name = "valid sudoku not complete",
+                name = "when valid sudoku not complete should return true",
                 correctRes = true,
-                res = sudokuCheckValidation(arrayOf(
+                res = sudokuChecker.sudokuCheckValidation(arrayOf(
                     arrayOf('5', '3', '4', '-', '-', '8', '9', '1', '2'),
                     arrayOf('6', '7', '-', '1', '9', '5', '3', '4', '8'),
                     arrayOf('1', '9', '8', '3', '-', '2', '5', '6', '7'),
@@ -34,9 +40,9 @@ class Test {
                 ))
             )
             check(
-                name = "when invalid row there is repetition ",
+                name = "when invalid row there is repetition should return false ",
                 correctRes = false,
-                res = sudokuCheckValidation(arrayOf(
+                res = sudokuChecker.sudokuCheckValidation(arrayOf(
                     arrayOf('5', '3', '4', '6', '7', '8', '9', '1', '2'),
                     arrayOf('6', '7', '2', '1', '9', '5', '3', '4', '8'),
                     arrayOf('1', '9', '8', '3', '4', '2', '5', '6', '7'),
@@ -49,9 +55,9 @@ class Test {
                 ))
             )
             check(
-                name = "when invalid column there is repetition ",
+                name = "when invalid column there is repetition should return false",
                 correctRes = false,
-                res = sudokuCheckValidation(arrayOf(
+                res = sudokuChecker.sudokuCheckValidation(arrayOf(
                     arrayOf('5', '3', '4', '6', '7', '8', '9', '1', '2'),
                     arrayOf('6', '7', '2', '1', '9', '5', '3', '4', '8'),
                     arrayOf('1', '9', '8', '3', '4', '2', '5', '6', '7'),
@@ -64,9 +70,9 @@ class Test {
                 ))
             )
             check(
-                name = "when invalid box 3*3 there is repetition ",
+                name = "when invalid box 3*3 there is repetition should return false",
                 correctRes = false,
-                res = sudokuCheckValidation(arrayOf(
+                res = sudokuChecker.sudokuCheckValidation(arrayOf(
                     arrayOf('5', '3', '4', '6', '7', '8', '9', '1', '2'),
                     arrayOf('6', '7', '2', '1', '9', '5', '3', '4', '8'),
                     arrayOf('1', '9', '8', '3', '4', '2', '5', '6', '7'),
@@ -79,9 +85,9 @@ class Test {
                 ))
             )
             check(
-                name = "when invalid size of row  ",
+                name = "when invalid size of column should return false",
                 correctRes = false,
-                res = sudokuCheckValidation(arrayOf(
+                res = sudokuChecker.sudokuCheckValidation(arrayOf(
                     arrayOf('5', '3', '4', '6', '7', '8', '9', '1', '2'),
                     arrayOf('6', '7', '2', '1', '9', '5', '3', '4'),//
                     arrayOf('1', '9', '8', '3', '4', '2', '5', '6', '7'),
@@ -94,9 +100,9 @@ class Test {
                 ))
             )
             check(
-                name = "when invalid size column ",
+                name = "when invalid size row should return false",
                 correctRes = false,
-                res = sudokuCheckValidation(arrayOf(
+                res = sudokuChecker.sudokuCheckValidation(arrayOf(
                     arrayOf('5', '3', '4', '6', '7', '8', '9', '1', '2'),
                     arrayOf('6', '7', '2', '1', '9', '5', '3', '4', '8'),
                     arrayOf('1', '9', '8', '3', '4', '2', '5', '6', '7'),
@@ -105,14 +111,15 @@ class Test {
                     arrayOf('7', '1', '3', '9', '2', '4', '8', '5', '6'),
                     arrayOf('9', '6', '1', '5', '3', '7', '2', '8', '4'),
                     arrayOf('2', '8', '7', '4', '1', '9', '6', '3', '5'),
+                    ///////////////////////////////////////////////////
                 ))
             )
             check(
-                name = "when invalid input not 1..9 or - ",
+                name = "when invalid input not 1..9 or -  should return false",
                 correctRes = false,
-                res = sudokuCheckValidation(arrayOf(
+                res = sudokuChecker.sudokuCheckValidation(arrayOf(
                     arrayOf('5', '3', '4', '6', '7', '8', '9', '1', '2'),
-                    arrayOf('6', '7', '2', '1', '9', '5', '3', '4', 'p'),//p
+                    arrayOf('6', '7', '2', '1', '9', '5', '3', '4', '0'),//p
                     arrayOf('1', '9', '8', '3', '4', '2', '5', '6', '7'),
                     arrayOf('8', '5', '9', '7', '6', '1', '4', '2', '3'),
                     arrayOf('4', '2', '6', '8', '5', '3', '7', '9', '1'),
@@ -129,7 +136,7 @@ class Test {
             else println("failed test $name")
         }
     }
-}
+
 
 /*
 - - - | - - - | - - -
@@ -156,13 +163,3 @@ valid 3*3 box         --> 6 - -
                           - 7 4  (There is no repetition)
                           5 9 -
 */
-
-
-
-/*
-checkRowColumnSubgrid({- , - , - , - , - , - , - , - , -})--> true
-checkRowColumnSubgrid({- , 4 , 3 , - , 6 , - , - , - , -})--> true
-checkRowColumnSubgrid({1 , 2 , 3 , 4 , 5 , 6 , 7 , 8 , 9})--> true
-checkRowColumnSubgrid({1 , - , 6 , - , 4 , 1 , - , 2 , -})--> false
-checkRowColumnSubgrid({1 , - , 6 , - , 4 , 1 , - , 1 , -})--> false
-   */

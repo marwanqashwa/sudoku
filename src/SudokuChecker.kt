@@ -1,16 +1,25 @@
  open class SudokuChecker {
 
    fun sudokuCheckValidation(sudoku: Array<Array<Char>>):Boolean{
-        if (!checkLen(sudoku))return false
+        if (sudoku.isEmpty()||!checkLen(sudoku))return false
         if (!checkValidationOfChar(sudoku))return false
         val sudokuToCheck=separateEachRowColumnSubgrid(sudoku)
-
         sudokuToCheck.forEach {
             if (!checkRowColumnSubgrid(it))return false
         }
         return true;
     }
 
+   private fun checkRowColumnSubgrid(row:Array<Char>):Boolean{
+
+         val rowToCheckSeenNumber = mutableSetOf<Char>()
+         for (cell in row) {
+             if (cell != '-' && !rowToCheckSeenNumber.add(cell)) {
+                 return false
+             }
+         }
+         return true
+     }
    private fun separateEachRowColumnSubgrid(arrayBeforeSeparate: Array<Array<Char>>): Array<Array<Char>>{
         val separatedSudoku = mutableListOf<Array<Char>>()
         arrayBeforeSeparate.forEach {separatedSudoku.add(it)}//rows
@@ -20,8 +29,6 @@
             }
             separatedSudoku.add(column)
         }//column
-
-
 
         for (startRow in listOf(0, 3, 6)) {
             for (startCol in listOf(0, 3, 6)) {
@@ -39,18 +46,6 @@
 
         return separatedSudoku.toTypedArray()
     }
-
-   private fun checkRowColumnSubgrid(row:Array<Char>):Boolean{
-
-       val rowToCheck = mutableSetOf<Char>()
-       for (cell in row) {
-           if (cell != '-' && !rowToCheck.add(cell)) {
-               return false
-           }
-       }
-       return true
-    }
-
    private fun checkValidationOfChar(arrayBeforeSeparate: Array<Array<Char>>):Boolean{
 
         for (row in arrayBeforeSeparate) {
@@ -61,10 +56,7 @@
             }
         }
         return true
-
-
     }
-
    private fun checkLen(arrayBeforeSeparate: Array<Array<Char>>):Boolean{
        if (arrayBeforeSeparate.size!=9)return false
        arrayBeforeSeparate.forEach { if (it.size != 9) return false }
